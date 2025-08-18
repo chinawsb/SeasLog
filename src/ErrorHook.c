@@ -20,7 +20,7 @@
 #if PHP_VERSION_ID < 80000
 void (*old_error_cb)(int type, const char *error_filename, const SEASLOG_UINT error_lineno, const char *format, va_list args);
 #else
-void (*old_error_cb)(int type, const char *error_filename, const SEASLOG_UINT error_lineno, zend_string *message);
+void (*old_error_cb)(int type, zend_string *error_filename, const SEASLOG_UINT error_lineno, zend_string *message);
 #endif
 
 static void process_event_error(const char *event_type, int type, char * error_filename, SEASLOG_UINT error_lineno, char * msg TSRMLS_DC)
@@ -43,7 +43,7 @@ static void process_event_error(const char *event_type, int type, char * error_f
 #if PHP_VERSION_ID < 80000
 void seaslog_error_cb(int type, const char *error_filename, const SEASLOG_UINT error_lineno, const char *format, va_list args)
 #else
-void seaslog_error_cb(int orig_type, const char *error_filename, const SEASLOG_UINT error_lineno,zend_string *message)
+void seaslog_error_cb(int orig_type, zend_string *error_filename, const SEASLOG_UINT error_lineno,zend_string *message)
 #endif
 {
     TSRMLS_FETCH();
