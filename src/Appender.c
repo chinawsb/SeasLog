@@ -269,7 +269,7 @@ int make_log_dir(char *dir TSRMLS_DC)
 
         if (p == buf)
         {
-            ret = php_mkdir_ex(dir, SEASLOG_DIR_MODE, PHP_STREAM_MKDIR_RECURSIVE TSRMLS_CC);
+            ret = php_stream_mkdir(dir, SEASLOG_DIR_MODE, PHP_STREAM_MKDIR_RECURSIVE TSRMLS_CC,0);
             if (ret < 0)
             {
                 seaslog_throw_exception(SEASLOG_EXCEPTION_LOGGER_ERROR TSRMLS_CC, "%s %s", dir, strerror(errno));
@@ -277,7 +277,7 @@ int make_log_dir(char *dir TSRMLS_DC)
         }
         else
         {
-            if (!(ret = php_mkdir_ex(buf, SEASLOG_DIR_MODE, PHP_STREAM_MKDIR_RECURSIVE TSRMLS_CC)))
+            if (!(ret = php_stream_mkdir(buf, SEASLOG_DIR_MODE, PHP_STREAM_MKDIR_RECURSIVE TSRMLS_CC,0)))
             {
                 if (!p)
                 {
